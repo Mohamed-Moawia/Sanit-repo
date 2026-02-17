@@ -1,0 +1,85 @@
+---
+# k8s/cms-api.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sanitary-cms-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sanitary-cms-api
+  template:
+    metadata:
+      labels:
+        app: sanitary-cms-api
+    spec:
+      containers:
+        - name: api
+          image: sanitary-cms-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: db-connection-string
+                  key: connection-string
+            - name: ConnectionStrings__Redis
+              value: redis:6379
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sanitary-cms-api
+spec:
+  selector:
+    app: sanitary-cms-api
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP
+---
+# k8s/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sanitary-cms-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - cms.sanitarycompany.com
+      secretName: sanitary-cms-tls
+  rules:
+    - host: cms.sanitarycompany.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sanitary-cms-api
+                port:
+                  number: 80
