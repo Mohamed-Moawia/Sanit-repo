@@ -1,55 +1,67 @@
-# Stage 1: Build
+# ==============================================================================
+# STAGE 1: BUILD
+# ==============================================================================
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
 WORKDIR /src
 
-# Scaffold a new Web API project (generates .csproj)
-RUN dotnet new webapi -n YourWebApiApp
+# Copy solution file
+COPY StationeryStore.sln ./
 
-# Copy your existing source files into the project folder
-COPY . ./YourWebApiApp
+# Copy all project files first for better layer caching
+COPY src/StationeryStore.API/StationeryStore.API.csproj ./src/StationeryStore.API/
+COPY src/StationeryStore.Domain/StationeryStore.Domain.csproj ./src/StationeryStore.Domain/
+COPY src/StationeryStore.Application/StationeryStore.Application.csproj ./src/StationeryStore.Application/
+COPY src/StationeryStore.Infrastructure/StationeryStore.Infrastructure.csproj ./src/StationeryStore.Infrastructure/
+COPY tests/StationeryStore.Tests/StationeryStore.Tests.csproj ./tests/StationeryStore.Tests/
 
-WORKDIR /src/YourWebApiApp
-
-# Restore dependencies
+# Restore dependencies (cached layer)
 RUN dotnet restore
 
-# Publish the application in Release mode
-RUN dotnet publish -c Release -o /app/publish
+# Copy all source code
+COPY . .
 
+# Build all projects
+RUN dotnet build StationeryStore.sln -c Release --no-restore
 
-# Stage 2: Runtime
+# Publish the API project
+RUN dotnet publish src/StationeryStore.API/StationeryStore.API.csproj -c Release -o /app/publish --no-build /p:UseAppHost=false
+
+# ==============================================================================
+# STAGE 2: RUNTIME
+# ==============================================================================
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 
 WORKDIR /app
 
+# Install curl for health checks and create non-root user
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && (getent passwd appuser >/dev/null 2>&1 || useradd -r -u 1001 -g root appuser)
+
 # Copy published output from build stage
 COPY --from=build /app/publish .
 
-# Create non-root user for security (Podman-friendly)
-RUN adduser --disabled-password --gecos "" appuser \
-    && chown -R appuser /app
+# Set ownership
+RUN chown -R appuser:root /app
+
+# Switch to non-root user
 USER appuser
 
-# Expose default ASP.NET Core port
+# Expose ports
 EXPOSE 8080
+EXPOSE 8081
 
-# Persistent volume for logs, configs, and audit evidence
-VOLUME ["/app/data"]
+# Configure environment variables
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_gcServer=1
+ENV TZ=Africa/Cairo
 
-# Healthcheck for container monitoring
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD curl -f http://localhost:8080/health || exit 1
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
 
-# Environment variables (override at runtime with `podman run -e`)
-ENV DOTNET_RUNNING_IN_CONTAINER=true \
-    DOTNET_gcServer=1 \
-    ASPNETCORE_URLS=http://+:8080 \
-    AUDIT_LOG_PATH=/app/data/audit.log \
-    APP_LOG_PATH=/app/data/app.log
-
-# CIS audit evidence hook: log startup configs
-ENTRYPOINT ["/bin/sh", "-c", "echo 'Container started at $(date)' >> $AUDIT_LOG_PATH && \
-  echo 'Environment: DOTNET_RUNNING_IN_CONTAINER=$DOTNET_RUNNING_IN_CONTAINER, ASPNETCORE_URLS=$ASPNETCORE_URLS' >> $AUDIT_LOG_PATH && \
-  dotnet YourWebApiApp.dll >> $APP_LOG_PATH 2>&1"]
-
+# Set entry point
+ENTRYPOINT ["dotnet", "StationeryStore.API.dll"]
