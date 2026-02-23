@@ -1,0 +1,113 @@
+[12:19:58 WRN] The foreign key property 'AuditTrail.UserId1' was created in shadow state because a conflicting property with the simple name 'UserId' exists in the entity type, but is either not mapped, is already used for another relationship, or is incompatible with the associated primary key type. See https://aka.ms/efcore-relationships for information on mapping relationships in EF Core. {"EventId": {"Id": 10625, "Name": "Microsoft.EntityFrameworkCore.Model.Validation.ShadowForeignKeyPropertyCreated"}, "SourceContext": "Microsoft.EntityFrameworkCore.Model.Validation", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 1}
+Cannot load library libgssapi_krb5.so.2 
+Error: Error loading shared library libgssapi_krb5.so.2: No such file or directory
+[12:19:59 INF] Database migrations applied successfully {"EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:19:59 INF] Starting Stationery Store API {"EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:19:59 WRN] Storing keys in a directory '/home/appuser/.aspnet/DataProtection-Keys' that may not be persisted outside of the container. Protected data will be unavailable when container is destroyed. For more information go to https://aka.ms/aspnet/dataprotectionwarning {"EventId": {"Id": 60, "Name": "UsingEphemeralFileSystemLocationInContainer"}, "SourceContext": "Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:19:59 WRN] No XML encryptor configured. Key {8f9cbecc-c10b-4f39-a7c6-52a353ae87af} may be persisted to storage in unencrypted form. {"EventId": {"Id": 35, "Name": "NoXMLEncryptorConfiguredKeyMayBePersistedToStorageInUnencryptedForm"}, "SourceContext": "Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 12}
+[12:19:59 WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'. {"EventId": {"Id": 15}, "SourceContext": "Microsoft.AspNetCore.Hosting.Diagnostics", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:19:59 INF] Now listening on: http://[::]:8080 {"EventId": {"Id": 14, "Name": "ListeningOnAddress"}, "SourceContext": "Microsoft.Hosting.Lifetime", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:19:59 INF] Application started. Press Ctrl+C to shut down. {"SourceContext": "Microsoft.Hosting.Lifetime", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:19:59 INF] Hosting environment: Production {"SourceContext": "Microsoft.Hosting.Lifetime", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:19:59 INF] Content root path: /app {"SourceContext": "Microsoft.Hosting.Lifetime", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 9}
+[12:20:28 WRN] Failed to determine the https port for redirect. {"EventId": {"Id": 3, "Name": "FailedToDeterminePort"}, "SourceContext": "Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware", "RequestId": "0HNJI1J1T6FAP:00000001", "RequestPath": "/health", "ConnectionId": "0HNJI1J1T6FAP", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 6}
+[12:20:28 INF] HTTP GET /health responded 200 in 117.6833ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAP:00000001", "ConnectionId": "0HNJI1J1T6FAP", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 8}
+[12:20:54 INF] HTTP GET / responded 404 in 7.1957ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000001", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:20:57 INF] HTTP GET / responded 404 in 2.6388ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000002", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:20:58 INF] HTTP GET / responded 404 in 0.2191ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000003", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:20:59 INF] HTTP GET /health responded 200 in 1.5693ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAS:00000001", "ConnectionId": "0HNJI1J1T6FAS", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:21:25 INF] HTTP GET / responded 404 in 0.2265ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000004", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:21:26 INF] HTTP GET / responded 404 in 0.2317ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000005", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:21:30 INF] HTTP GET /health responded 200 in 0.7653ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAT:00000001", "ConnectionId": "0HNJI1J1T6FAT", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 30}
+[12:21:40 INF] HTTP GET / responded 404 in 0.2606ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000006", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:21:41 INF] HTTP GET / responded 404 in 0.5025ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000007", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:21:42 INF] HTTP GET / responded 404 in 0.1937ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000008", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 28}
+[12:21:42 INF] HTTP GET / responded 404 in 0.2346ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:00000009", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:21:43 INF] HTTP GET / responded 404 in 0.2709ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:0000000A", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:21:43 INF] HTTP GET / responded 404 in 0.2671ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:0000000B", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:21:43 INF] HTTP GET / responded 404 in 0.2757ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:0000000C", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:21:43 INF] HTTP GET / responded 404 in 0.3247ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:0000000D", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:21:43 INF] HTTP GET / responded 404 in 0.2466ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:0000000E", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:21:45 INF] HTTP GET / responded 404 in 0.2316ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAR:0000000F", "ConnectionId": "0HNJI1J1T6FAR", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:22:01 INF] HTTP GET /health responded 200 in 0.6099ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAU:00000001", "ConnectionId": "0HNJI1J1T6FAU", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 27}
+[12:22:31 INF] HTTP GET /health responded 200 in 0.6392ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FAV:00000001", "ConnectionId": "0HNJI1J1T6FAV", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 31}
+[12:23:02 INF] HTTP GET /health responded 200 in 0.7744ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB0:00000001", "ConnectionId": "0HNJI1J1T6FB0", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 29}
+[12:23:33 INF] HTTP GET /health responded 200 in 0.7115ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB1:00000001", "ConnectionId": "0HNJI1J1T6FB1", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 37}
+[12:24:04 INF] HTTP GET /health responded 200 in 0.7860ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB2:00000001", "ConnectionId": "0HNJI1J1T6FB2", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 39}
+[12:24:35 INF] HTTP GET /health responded 200 in 0.6817ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB3:00000001", "ConnectionId": "0HNJI1J1T6FB3", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 41}
+[12:24:57 ERR] HTTP GET /egypt/info responded 500 in 7.7289ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB5:00000001", "ConnectionId": "0HNJI1J1T6FB5", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 42}
+System.TimeZoneNotFoundException: The time zone ID 'Africa/Cairo' was not found on the local computer.
+ ---> System.IO.DirectoryNotFoundException: Could not find a part of the path '/usr/share/zoneinfo/Africa/Cairo'.
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.TimeZoneInfo.ReadAllBytesFromSeekableNonZeroSizeFile(String path, Int32 maxFileSize)
+   at System.TimeZoneInfo.TryGetTimeZoneFromLocalMachineCore(String id, TimeZoneInfo& value, Exception& e)
+   --- End of inner exception stack trace ---
+   at System.TimeZoneInfo.FindSystemTimeZoneById(String id)
+   at lambda_method98(Closure, Object, HttpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[12:24:57 ERR] Connection id "0HNJI1J1T6FB5", Request id "0HNJI1J1T6FB5:00000001": An unhandled exception was thrown by the application. {"EventId": {"Id": 13, "Name": "ApplicationError"}, "SourceContext": "Microsoft.AspNetCore.Server.Kestrel", "RequestId": "0HNJI1J1T6FB5:00000001", "RequestPath": "/egypt/info", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 42}
+System.TimeZoneNotFoundException: The time zone ID 'Africa/Cairo' was not found on the local computer.
+ ---> System.IO.DirectoryNotFoundException: Could not find a part of the path '/usr/share/zoneinfo/Africa/Cairo'.
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.TimeZoneInfo.ReadAllBytesFromSeekableNonZeroSizeFile(String path, Int32 maxFileSize)
+   at System.TimeZoneInfo.TryGetTimeZoneFromLocalMachineCore(String id, TimeZoneInfo& value, Exception& e)
+   --- End of inner exception stack trace ---
+   at System.TimeZoneInfo.FindSystemTimeZoneById(String id)
+   at lambda_method98(Closure, Object, HttpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+[12:25:05 INF] HTTP GET /health responded 200 in 6.4198ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB6:00000001", "ConnectionId": "0HNJI1J1T6FB6", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 45}
+[12:25:27 INF] HTTP GET /api/orders responded 404 in 0.3137ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB5:00000002", "ConnectionId": "0HNJI1J1T6FB5", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 42}
+[12:25:36 INF] HTTP GET /health responded 200 in 0.7996ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB7:00000001", "ConnectionId": "0HNJI1J1T6FB7", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 47}
+[12:25:38 INF] HTTP GET /api/products responded 401 in 6.5833ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB5:00000003", "ConnectionId": "0HNJI1J1T6FB5", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 46}
+[12:25:50 INF] HTTP GET /health/live responded 200 in 1.0481ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB5:00000004", "ConnectionId": "0HNJI1J1T6FB5", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 34}
+[12:25:50 INF] HTTP GET /favicon.ico responded 404 in 0.2170ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB5:00000005", "ConnectionId": "0HNJI1J1T6FB5", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 42}
+[12:26:07 INF] HTTP GET /health responded 200 in 1.1863ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB8:00000001", "ConnectionId": "0HNJI1J1T6FB8", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 48}
+[12:26:07 INF] HTTP GET /health responded 200 in 0.7550ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB5:00000006", "ConnectionId": "0HNJI1J1T6FB5", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 49}
+[12:26:14 ERR] HTTP GET /egypt/info responded 500 in 0.8236ms {"SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware", "RequestId": "0HNJI1J1T6FB5:00000007", "ConnectionId": "0HNJI1J1T6FB5", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 49}
+System.TimeZoneNotFoundException: The time zone ID 'Africa/Cairo' was not found on the local computer.
+ ---> System.IO.DirectoryNotFoundException: Could not find a part of the path '/usr/share/zoneinfo/Africa/Cairo'.
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.TimeZoneInfo.ReadAllBytesFromSeekableNonZeroSizeFile(String path, Int32 maxFileSize)
+   at System.TimeZoneInfo.TryGetTimeZoneFromLocalMachineCore(String id, TimeZoneInfo& value, Exception& e)
+   --- End of inner exception stack trace ---
+   at System.TimeZoneInfo.FindSystemTimeZoneById(String id)
+   at lambda_method98(Closure, Object, HttpContext)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+[12:26:14 ERR] Connection id "0HNJI1J1T6FB5", Request id "0HNJI1J1T6FB5:00000007": An unhandled exception was thrown by the application. {"EventId": {"Id": 13, "Name": "ApplicationError"}, "SourceContext": "Microsoft.AspNetCore.Server.Kestrel", "RequestId": "0HNJI1J1T6FB5:00000007", "RequestPath": "/egypt/info", "EnvironmentName": "Production", "MachineName": "ad9d5c3a3686", "ThreadId": 49}
+System.TimeZoneNotFoundException: The time zone ID 'Africa/Cairo' was not found on the local computer.
+ ---> System.IO.DirectoryNotFoundException: Could not find a part of the path '/usr/share/zoneinfo/Africa/Cairo'.
+   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)
+   at System.TimeZoneInfo.ReadAllBytesFromSeekableNonZeroSizeFile(String path, Int32 maxFileSize)
+   at System.TimeZoneInfo.TryGetTimeZoneFromLocalMachineCore(String id, TimeZoneInfo& value, Exception& e)
+   --- End of inner exception stack trace ---
+   at System.TimeZoneInfo.FindSystemTimeZoneById(String id)
+   at lambda_method98(Closure, Object, HttpContext)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)

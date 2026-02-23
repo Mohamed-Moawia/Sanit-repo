@@ -1,0 +1,100 @@
+services:
+  # ============================================================================
+  # STATIONERY STORE API
+  # ============================================================================
+  stationery-api:
+    image: localhost/sanit-webapp:v7
+    container_name: stationery-api
+    command: ["dotnet", "StationeryStore.API.dll"]
+    ports:
+      - "8080:8080"
+      - "8443:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__PostgreSQL=Host=postgres-db;Port=5432;Database=StationeryStore;Username=stationery_admin;Password=Stationery@2026!Secure
+      - ConnectionStrings__Redis=redis:6379,password=Redis@2026!Secure,abortConnect=false
+      - JwtSettings__Secret=SuperSecureSecretKeyForEgyptStationeryStore2026Min32Characters!
+      - JwtSettings__Issuer=StationeryStoreEgypt
+      - JwtSettings__Audience=StationeryStoreUsers
+      - EgyptSettings__DefaultVatRate=14.0
+      - EgyptSettings__TimeZone=Africa/Cairo
+      - EgyptSettings__DefaultLanguage=ar
+      - EgyptSettings__DefaultCurrency=EGP
+      - CacheSettings__RedisEnabled=true
+      - Serilog__MinimumLevel__Default=Information
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - api_logs:/app/logs
+    networks:
+      - stationery-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ============================================================================
+  # POSTGRESQL DATABASE
+  # ============================================================================
+  postgres-db:
+    image: postgres:17-alpine
+    container_name: stationery-postgres
+    environment:
+      - POSTGRES_DB=StationeryStore
+      - POSTGRES_USER=stationery_admin
+      - POSTGRES_PASSWORD=Stationery@2026!Secure
+      - TZ=Africa/Cairo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+    networks:
+      - stationery-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U stationery_admin -d StationeryStore"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # ============================================================================
+  # REDIS CACHE
+  # ============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: stationery-redis
+    command: redis-server --requirepass Redis@2026!Secure --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - stationery-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--pass", "Redis@2026!Secure", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  api_logs:
+    driver: local
+
+networks:
+  stationery-network:
+    driver: bridge

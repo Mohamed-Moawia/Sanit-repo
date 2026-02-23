@@ -1,0 +1,79 @@
+name: .NET 10 Build & Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  packages: write  # Needed to push to GHCR
+
+jobs:
+  security-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1. Setup .NET 10
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      # 2. Dependency Scan (SCA) - Check for vulnerable NuGet packages
+      - name: Restore dependencies
+        run: dotnet restore StationeryStore.sln
+      - name: List Vulnerabilities
+        run: dotnet list package --vulnerable --include-transitive
+
+      # 3. Build & Publish
+      - name: Build Solution
+        run: dotnet build StationeryStore.sln -c Release --no-restore
+      - name: Publish App
+        run: dotnet publish src/StationeryStore.API/StationeryStore.API.csproj -c Release -o ./publish --no-build
+
+      # 4. Login to GitHub Container Registry (GHCR)
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 5. Build and Scan Container
+      - name: Build Docker Image
+        run: |
+          docker build -t ghcr.io/${{ github.repository_owner }}/stationery-store:latest .
+          docker tag ghcr.io/${{ github.repository_owner }}/stationery-store:latest ghcr.io/${{ github.repository_owner }}/stationery-store:${{ github.sha }}
+
+      - name: Container Security Scan (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ghcr.io/${{ github.repository_owner }}/stationery-store:latest'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+
+      # 6. Push to GHCR
+      - name: Push Image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/stationery-store:latest
+          docker push ghcr.io/${{ github.repository_owner }}/stationery-store:${{ github.sha }}
+
+  deploy-to-aws:
+    needs: security-and-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 7. Update App Runner to use the new image
+      - name: Deploy to AWS App Runner
+        run: |
+          aws apprunner update-service \
+            --service-arn $(aws apprunner list-services --query "ServiceSummaryList[?ServiceName=='stationery-store'].ServiceArn" --output text) \
+            --image-repository "image_identifier=ghcr.io/${{ github.repository_owner }}/stationery-store:latest,image_repository_type=EXTERNAL"

@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StationeryStore.API</name>
+    </assembly>
+    <members>
+        <member name="T:StationeryStore.API.Controllers.AuthController">
+            <summary>
+            Authentication and authorization controller
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.AuthController.Login(StationeryStore.Application.DTOs.LoginRequest)">
+            <summary>
+            Login with username/email and password
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.AuthController.RefreshToken(System.String)">
+            <summary>
+            Refresh access token
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.AuthController.ChangePassword(StationeryStore.Application.DTOs.ChangePasswordRequest)">
+            <summary>
+            Change password
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.AuthController.Logout">
+            <summary>
+            Logout
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.AuthController.GetCurrentUser">
+            <summary>
+            Get current user profile
+            </summary>
+        </member>
+        <member name="T:StationeryStore.API.Controllers.CustomersController">
+            <summary>
+            Customers management controller
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.CustomersController.GetCustomers(System.Int32,System.Int32,System.String,System.Nullable{StationeryStore.Domain.Enums.CustomerType},System.String,System.Nullable{System.Boolean})">
+            <summary>
+            Get all customers with filtering and pagination
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.CustomersController.GetCustomer(System.Guid)">
+            <summary>
+            Get customer by ID
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.CustomersController.CreateCustomer(StationeryStore.Application.DTOs.CreateCustomerRequest)">
+            <summary>
+            Create new customer
+            </summary>
+        </member>
+        <member name="T:StationeryStore.API.Controllers.ProductsController">
+            <summary>
+            Products management controller
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.ProductsController.GetProducts(System.Int32,System.Int32,System.String,System.String,System.Nullable{System.Guid},System.Nullable{System.Guid},System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+            <summary>
+            Get all products with filtering and pagination
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.ProductsController.GetProduct(System.Guid)">
+            <summary>
+            Get product by ID
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.ProductsController.GetProductByBarcode(System.String)">
+            <summary>
+            Get product by barcode
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.ProductsController.CreateProduct(StationeryStore.Application.DTOs.CreateProductRequest)">
+            <summary>
+            Create new product
+            </summary>
+        </member>
+        <member name="M:StationeryStore.API.Controllers.ProductsController.UpdateStock(System.Guid,StationeryStore.Application.DTOs.UpdateStockRequest)">
+            <summary>
+            Update product stock
+            </summary>
+        </member>
+        <member name="T:CurrentUserProvider">
+            <summary>
+            Current user provider implementation
+            </summary>
+        </member>
+    </members>
+</doc>

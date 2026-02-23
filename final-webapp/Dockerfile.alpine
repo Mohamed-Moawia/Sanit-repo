@@ -1,0 +1,84 @@
+# ==============================================================================
+# STAGE 1: BUILD REACT FRONTEND
+# ==============================================================================
+FROM node:20-alpine AS frontend-build
+
+WORKDIR /app/stationery-frontend
+
+# Copy package files
+COPY stationery-frontend/package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY stationery-frontend/ ./
+
+# Build the frontend
+RUN npm run build
+
+# ==============================================================================
+# STAGE 2: BUILD .NET API
+# ==============================================================================
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build
+
+WORKDIR /src
+
+# Copy Docker-specific solution file (without tests)
+COPY StationeryStore.Docker.sln ./
+
+# Copy project files
+COPY src/StationeryStore.API/StationeryStore.API.csproj ./src/StationeryStore.API/
+COPY src/StationeryStore.Domain/StationeryStore.Domain.csproj ./src/StationeryStore.Domain/
+COPY src/StationeryStore.Application/StationeryStore.Application.csproj ./src/StationeryStore.Application/
+COPY src/StationeryStore.Infrastructure/StationeryStore.Infrastructure.csproj ./src/StationeryStore.Infrastructure/
+
+# Restore dependencies
+RUN dotnet restore
+
+# Copy source code
+COPY src/ ./src/
+
+# Copy built frontend
+COPY --from=frontend-build /app/stationery-frontend/dist ./stationery-frontend/dist
+
+# Publish the API
+RUN dotnet publish src/StationeryStore.API/StationeryStore.API.csproj -c Release -o /app/publish --os linux --arch x64
+
+# ==============================================================================
+# STAGE 3: RUNTIME
+# ==============================================================================
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS runtime
+
+WORKDIR /app
+
+# Install ICU libraries, curl for health checks, and tzdata for timezone support
+RUN apk add --no-cache icu-libs curl tzdata
+
+# Create non-root user
+RUN addgroup -S appuser && adduser -S appuser -G appuser
+
+# Copy published output including frontend
+COPY --from=build /app/publish .
+COPY --from=build /app/stationery-frontend/dist ./wwwroot
+
+# Set ownership
+RUN chown -R appuser:root /app
+
+# Configure environment variables
+ENV ASPNETCORE_URLS=http://+:8080
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_gcServer=1
+ENV TZ=Africa/Cairo
+
+USER appuser
+
+EXPOSE 8080
+EXPOSE 8081
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8080/health || exit 1
+
+ENTRYPOINT ["dotnet", "StationeryStore.API.dll"]

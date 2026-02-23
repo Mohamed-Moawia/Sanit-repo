@@ -1,0 +1,75 @@
+version: '3.8'
+
+# Development docker-compose for local development
+services:
+  # ============================================================================
+  # STATIONERY STORE API (Development)
+  # ============================================================================
+  stationery-api-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    container_name: stationery-api-dev
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__PostgreSQL=Host=postgres-db;Port=5432;Database=StationeryStore;Username=stationery_admin;Password=Stationery@2026!Secure
+      - ConnectionStrings__Redis=redis:6379,password=Redis@2026!Secure,abortConnect=false
+      - JwtSettings__Secret=DevSecretKeyForEgyptStationeryStore2026Min32Characters!!
+      - JwtSettings__Issuer=StationeryStoreEgypt
+      - JwtSettings__Audience=StationeryStoreUsers
+      - Logging__LogLevel__Default=Debug
+    depends_on:
+      - postgres-db
+      - redis
+    volumes:
+      - ./src:/src/src
+      - api_dev_logs:/app/logs
+    networks:
+      - stationery-network
+    command: ["dotnet", "watch", "run", "--project", "/src/src/StationeryStore.API"]
+
+  # ============================================================================
+  # POSTGRESQL DATABASE
+  # ============================================================================
+  postgres-db:
+    image: postgres:17-alpine
+    container_name: stationery-postgres-dev
+    environment:
+      - POSTGRES_DB=StationeryStore
+      - POSTGRES_USER=stationery_admin
+      - POSTGRES_PASSWORD=Stationery@2026!Secure
+      - TZ=Africa/Cairo
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+    networks:
+      - stationery-network
+
+  # ============================================================================
+  # REDIS CACHE
+  # ============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: stationery-redis-dev
+    command: redis-server --requirepass Redis@2026!Secure
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_dev_data:/data
+    networks:
+      - stationery-network
+
+volumes:
+  postgres_dev_data:
+  redis_dev_data:
+  api_dev_logs:
+
+networks:
+  stationery-network:
+    driver: bridge
