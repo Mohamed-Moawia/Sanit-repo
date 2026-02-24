@@ -6,7 +6,6 @@ echo "Optimizing services for Debian 13.3 on Dell 4520..."
 
 # --- Disable unnecessary services ---
 services_to_disable=(
-    bluetooth.service
     cups.service
     avahi-daemon.service
     ModemManager.service

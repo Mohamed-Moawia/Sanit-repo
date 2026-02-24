@@ -56,11 +56,11 @@ sudo apt install -y konsole
 sudo apt purge -y xfce4-terminal
 
 # Monitoring & utilities
-sudo apt install -y htop neofetch curl wget
+sudo apt install -y htop fastfetch curl wget gpg
 
 # --- Install Microsoft Edge ---
 echo "Adding Microsoft Edge repository..."
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft.gpg
+curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft.gpg > /dev/null
 
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main" | sudo tee /etc/apt/sources.list.d/microsoft-edge.list
 
